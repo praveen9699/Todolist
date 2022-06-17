@@ -1,0 +1,24 @@
+<form [formGroup]="profiles" class="form">
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" formControlName="firstName"><br>
+        <div *ngIf="profiles.get('firstName')!.invalid && profiles.get('firstName')!.touched">
+             <small class="text-danger" *ngIf="profiles.get('firstName')!.errors?.['required']">name is required</small>
+             <small class="text-danger" *ngIf="profiles.get('firstName')!.errors?.['minlength']">name must be in 4 latters</small>
+        </div>
+
+    <button type="submit" [disabled]="!profiles.valid" class="bg"
+    (click)="createUser()">create account</button>
+    
+        <!-- <span *ngIf="showmsg">sucessfully created</span> -->
+            <ul>
+            <li *ngFor = "let task of tasks;let i=index">
+                <span *ngIf="task.status == 'done'" class="stline">{{task.name}}</span>
+                <span *ngIf="task.status != 'done'">{{task.name}}</span>
+                <!-- <button (click)=editform(row) class="ba">edit</button>-->
+                {{myDate | date:'long'}}
+                <button (click)="taskremove(task._id)" class="bc">delete</button>
+                <button (click)="markAsDone(task)">done</button>
+            </li>
+            </ul>
+          
+        </form>
